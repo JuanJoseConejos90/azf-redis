@@ -1,0 +1,35 @@
+services:
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis-local
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  azf:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: azf-app
+    ports:
+      - "7071:7071"
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      REDIS_PASSWORD: ""
+      REDIS_TLS: "false"
+      REDIS_TTL_SECONDS: "0"
+      AzureWebJobsStorage: "UseDevelopmentStorage=true"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+volumes:
+  redis_data:

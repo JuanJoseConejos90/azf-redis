@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": [
+    "src/index.ts",
+    "src/models/**/*",
+    "src/factories/**/*",
+    "src/repositories/**/*",
+    "src/functions/**/*"
+  ]
+}

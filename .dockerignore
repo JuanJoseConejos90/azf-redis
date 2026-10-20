@@ -1,0 +1,11 @@
+node_modules
+dist
+dist-test
+coverage
+.git
+.gitignore
+*.md
+local.settings.json
+tsconfig.test.json
+jest.config.js
+src/tests
